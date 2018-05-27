@@ -1,0 +1,86 @@
+All unit test / integration test for services will be put into here
+
+# Integration Test Approach
+This test approach will be applied for each HTTP method in service
+
+- Service method / function has been registered or not
+- Happy cases: access with simple data and received the correct result
+- Auth
+    - Access service as anonymous
+    - Access with role admin
+    - Access with other roles if any
+- Common validation
+    - Request with null, undefined, wrong data type
+    - Request with missing id
+    - Request with missing input data
+    - Request should return Dto instance instead of anonymous object
+- Service Method specified validation
+    - Flow test: test the logic but do not re-test what have been tested in business layer
+    - Special cases for this method only
+- HTTP code: test all possible HTTP codes below if any
+    - Code 200
+    - Code 201
+    - Code 400
+    - Code 401
+    - Code 403
+    - Code 404
+    - Code 405
+    - Code 406
+    - Code 500
+    - Code 501
+
+# HTTP Status Code For Service Methods
+## Validation - Apply for all methods
+- HTTP 400 - Bad Request
+- HTTP 404 - Not Found
+
+## Auth - Apply for all methods
+- HTTP 401 - Unauthorized
+- HTTP 403 - Forbidden
+- HTTP 405 - Optional
+
+## Get
+- HTTP 200 - OK
+
+## Post
+- HTTP 201 - Created
+- HTTP 303 - See Other
+
+## Put
+- HTTP 200 - OK
+- HTTP 204 - No Content
+- HTTP 201 - Created
+
+## Patch
+- HTTP 200 - OK
+- HTTP 204 - No Content
+
+## Delete
+- HTTP 200: Delete successfully and service response information to client
+- HTTP 202: For asyn, not use for now. The request has been accepted but not deleted yet
+- HTTP 204: No content. Delete successfully but service does not have information to response to client
+
+
+
+# Sample Code
+```javascript
+describe('### FIND', () => {
+    // service registration
+    it('should register FIND', () => {
+        assert.notStrictEqual(service.find, undefined);
+    });
+
+    /**
+    * happy cases
+    * Consume the service internally (direct consume) instead of using http request
+    */
+
+    // validation
+
+    // auth
+
+    // http status code
+
+    // special cases
+});
+```
