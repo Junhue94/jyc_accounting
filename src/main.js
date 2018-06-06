@@ -20,10 +20,12 @@ import router from './router';
 import store from './store';
 import ValidatePlugin from './plugins/validate.plugin';
 import DatePicker from 'vue-bootstrap-datetimepicker';
+import BootstrapVue from 'bootstrap-vue';
 
 // Use third-party modules in Vue
 Vue.use(ValidatePlugin);
 Vue.use(DatePicker);
+Vue.use(BootstrapVue);
 
 /**
  * Initialize a Vue instance
