@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 
 // Routes
 import { routeLogin } from './login';
+import { routeAccount } from './account';
 import { routeContact } from './contact';
 
 // Layouts
@@ -32,6 +33,7 @@ export default new VueRouter({
             path: '/',
             component: AppLayout,
             children: [
+                ...routeAccount,
                 ...routeContact,
                 {
                     path: '',

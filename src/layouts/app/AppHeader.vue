@@ -1,6 +1,12 @@
 <template>
     <section class="app-header">
-        <div>Header</div>
+        <ul class="nav">
+            <li>
+                <a>
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+        </ul>
     </section>
 </template>
 
@@ -20,7 +26,20 @@
         display: grid;
         position: fixed;
         background-color: $white-default;
-        box-shadow: 0 2px #bfbfbf;
+        box-shadow: 0 2px #d3d3d3;
+        z-index: 1;
+        
+        .nav {
+            display: inline-flex;
+            
+            li {
+                border-right: 1px solid #e9e9e9;
+                
+                a {
+                    cursor: pointer;
+                }
+            }
+        }
     
         @media screen and (max-width: 768px) {
         

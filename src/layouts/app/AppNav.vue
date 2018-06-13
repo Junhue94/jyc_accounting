@@ -1,10 +1,10 @@
 <template>
     <div class="app-nav">
-        <div class="app-nav-user">
-            <img class="user-img" src="../../assets/straw_hat_icon.png" alt="User Avatar"/>
-            <p class="user-text">Username</p>
-        </div>
         <ul class="nav">
+            <li class="user">
+                <img class="user-img" src="../../assets/straw_hat_icon.png" alt="User Avatar"/>
+                <p class="user-text">Username</p>
+            </li>
             <router-link tag="li" :to="{ name: 'accountList' }">
                 <i class="fa fa-book"></i>
                 <span>Accounts</span>
@@ -30,29 +30,21 @@
 <style scoped lang="scss">
     @import "../../styles/variables";
     
-    .app-nav{
+    .app-nav {
         width: 200px;
         min-height: 100vh;
         padding-top: 25px;
         background: #34323a;
+        float: left;
         
-        .app-nav-user {
-            border-bottom: 1px solid #413f48;
-            
-            .user-img {
-                width: 90px;
-                height: 90px;
-                display: block;
-                margin: 0 auto;
-                border-radius: 50%;
-            }
-            
-            .user-text {
-                margin: 0;
-                padding: 10px 0;
-                text-align: center;
-                color: $light-gray-default;
-            }
+        &::before {
+            content: "";
+            position: fixed;
+            display: block;
+            top: 0;
+            bottom: 0;
+            width: inherit;
+            background-color: #34323a;
         }
         
         .nav {
@@ -64,9 +56,30 @@
                 text-align: left;
                 border-bottom: 1px solid #413f48;
                 transition: all 0.2s ease-in-out;
-                
-                span {
-                    margin-left: 10px;
+    
+                &.user {
+                    border-bottom: 1px solid #413f48;
+                    cursor: auto;
+        
+                    .user-img {
+                        width: 90px;
+                        height: 90px;
+                        display: block;
+                        margin: 0 auto;
+                        border-radius: 50%;
+                        border: 2px solid $white-default;
+                    }
+        
+                    .user-text {
+                        margin: 0;
+                        padding: 10px 0;
+                        text-align: center;
+                        color: $light-gray-default;
+                    }
+    
+                    &:hover {
+                        background-color: #34323a;
+                    }
                 }
                 
                 &.router-link-active {
@@ -78,6 +91,10 @@
                 &:hover {
                     background-color: $black-default;
                     color: $white-default;
+                }
+                
+                span {
+                    margin-left: 10px;
                 }
             }
         }
