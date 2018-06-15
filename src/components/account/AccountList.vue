@@ -5,6 +5,12 @@
                 <template slot="button">
                     <router-link
                         tag="button"
+                        class="btn btn-primary"
+                        :to="{ name: 'accountNew' }"
+                    >Add New Category
+                    </router-link>
+                    <router-link
+                        tag="button"
                         class="btn btn-success"
                         :to="{ name: 'accountNew' }"
                     >Add New Account
@@ -15,7 +21,7 @@
                 <template slot="heading">ACCOUNTS</template>
                 <template slot="body">
                     <list-table>
-                        <template slot="tbody">
+                        <template slot="thead">
                             <tr>
                                 <th>Name</th>
                                 <th>Total</th>
@@ -23,7 +29,7 @@
                         </template>
                         <template slot="tbody">
                             <tr v-for="account in accountList">
-                                <td>{{ account.name }}</td>
+                                <td>{{ account.name}}</td>
                                 <td></td>
                             </tr>
                         </template>
@@ -35,13 +41,13 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex';
+    import Toastr from '../../utils/ui-toaster';
+    import Logger from '../../utils/ui-logger';
     import ListPage from '../common/ListPage';
     import ListTable from '../common/ListTable';
     import ButtonRow from '../common/ButtonRow';
     import Panel from '../common/Panel';
-    import { mapGetters, mapActions } from 'vuex';
-    import Toastr from '../../utils/ui-toaster';
-    import Logger from '../../utils/ui-logger';
 
     const toastr = new Toastr();
     const logger = new Logger();
