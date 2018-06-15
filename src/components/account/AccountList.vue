@@ -1,37 +1,81 @@
 <template>
     <list-page>
         <template slot="content">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            ACCOUNTS
-                            <span class="pull-right">
-                                <router-link
-                                    tag="div"
-                                    class="btn btn-success"
-                                    :to="{ name: 'accountNew' }"
-                                >Add New Account</router-link>
-                            </span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-body">
-                            Panel content
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button-row>
+                <template slot="button">
+                    <router-link
+                        tag="button"
+                        class="btn btn-success"
+                        :to="{ name: 'accountNew' }"
+                    >Add New Account
+                    </router-link>
+                </template>
+            </button-row>
+            <panel>
+                <template slot="heading">ACCOUNTS</template>
+                <template slot="body">
+                    <list-table>
+                        <template slot="tbody">
+                            <tr>
+                                <th>Name</th>
+                                <th>Total</th>
+                            </tr>
+                        </template>
+                        <template slot="tbody">
+                            <tr v-for="account in accountList">
+                                <td>{{ account.name }}</td>
+                                <td></td>
+                            </tr>
+                        </template>
+                    </list-table>
+                </template>
+            </panel>
         </template>
     </list-page>
 </template>
 
 <script>
     import ListPage from '../common/ListPage';
+    import ListTable from '../common/ListTable';
+    import ButtonRow from '../common/ButtonRow';
+    import Panel from '../common/Panel';
+    import { mapGetters, mapActions } from 'vuex';
+    import Toastr from '../../utils/ui-toaster';
+    import Logger from '../../utils/ui-logger';
+
+    const toastr = new Toastr();
+    const logger = new Logger();
     
     export default {
         name: 'AccountList',
         components: {
-            listPage: ListPage
+            ListPage,
+            ListTable,
+            ButtonRow,
+            Panel
+        },
+        methods: {
+            ...mapActions('account', {
+                findList: 'findAccountList'
+            }),
+            loadAccountList() {
+                this.findList()
+                    .catch((err) => {
+                        logger.error(err);
+                        toastr.callbackError();
+                    });
+            }
+        },
+        computed: {
+            ...mapGetters('account', {
+                fetchAccountList: 'accountList'
+            }),
+            accountList() {
+                return this.fetchAccountList;
+            }
+        },
+        created() {
+            this.loadAccountList();
         }
     };
 </script>

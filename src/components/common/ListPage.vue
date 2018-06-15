@@ -6,11 +6,11 @@
 
 <script>
     export default {
-        name: "ListPage"
+        name: 'ListPage'
     };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .page {
         padding: 55px 15px 0 15px;
     }

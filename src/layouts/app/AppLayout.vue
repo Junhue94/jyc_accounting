@@ -22,7 +22,5 @@
 </script>
 
 <style scoped lang="scss">
-    .app-layout {
-    
-    }
+
 </style>

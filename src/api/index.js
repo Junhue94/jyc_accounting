@@ -30,6 +30,12 @@ export const SERVER_URL = process.env.NODE_ENV === 'production'
  */
 export const AUTH_SERVICE = feathersClient.service('auth');
 export const CONTACT_SERVICE = feathersClient.service('contact');
+export const ACCOUNT_SERVICE = feathersClient.service('account');
+
+/**
+ * Postgres Table
+ */
+export const ACCOUNT_TABLE = 'Account';
 
 /**
  * Mock Cloudant Views

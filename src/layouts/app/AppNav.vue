@@ -33,7 +33,6 @@
     .app-nav {
         width: 200px;
         min-height: 100vh;
-        padding-top: 25px;
         background: #34323a;
         float: left;
         
@@ -58,6 +57,7 @@
                 transition: all 0.2s ease-in-out;
     
                 &.user {
+                    padding: 20px 18px;
                     border-bottom: 1px solid #413f48;
                     cursor: auto;
         
@@ -72,7 +72,7 @@
         
                     .user-text {
                         margin: 0;
-                        padding: 10px 0;
+                        padding-top: 10px;
                         text-align: center;
                         color: $light-gray-default;
                     }
@@ -97,14 +97,6 @@
                     margin-left: 10px;
                 }
             }
-        }
-    
-        @media screen and (max-width: 768px) {
-        
-        }
-    
-        @media screen and (max-width: 480px) {
-            display: none;
         }
     }
 </style>
