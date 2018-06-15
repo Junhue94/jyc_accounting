@@ -1,13 +1,13 @@
 /**
  * List of All Routes
  */
-
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 // Routes
 import { routeLogin } from './login';
 import { routeAccount } from './account';
+import { routeStock } from './stock';
 import { routeContact } from './contact';
 
 // Layouts
@@ -34,6 +34,7 @@ export default new VueRouter({
             component: AppLayout,
             children: [
                 ...routeAccount,
+                ...routeStock,
                 ...routeContact,
                 {
                     path: '',

@@ -18,7 +18,27 @@
 </script>
 
 <style scoped lang="scss">
-    table {
+    table.table.table-bordered {
         margin: 0;
+        
+        thead {
+            tr {
+                th {
+                    text-align: center;
+                    vertical-align: middle;
+                    font-size: 12px;
+                }
+            }
+        }
+        
+        tbody {
+            tr {
+                td {
+                    text-align: center;
+                    vertical-align: middle;
+                    font-size: 12px;
+                }
+            }
+        }
     }
 </style>

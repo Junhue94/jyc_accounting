@@ -1,8 +1,8 @@
 /**
  * API Account Service
  */
-import { ACCOUNT_SERVICE } from '..';
-import { AccountMockHook } from '../_mock/account/account-mock-hook';
+import { ACCOUNT_SERVICE } from './index';
+import { AccountMockHook } from './_mock/account/account-mock-hook';
 
 class AccountService {
     constructor() {

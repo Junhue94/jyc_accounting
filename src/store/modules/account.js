@@ -3,7 +3,7 @@
  */
 
 import _ from 'lodash';
-import AccountService from '../../api/account/account-service';
+import AccountService from '../../api/account-service';
 
 const accountService = new AccountService();
 

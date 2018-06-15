@@ -9,6 +9,10 @@
                 <i class="fa fa-book"></i>
                 <span>Accounts</span>
             </router-link>
+            <router-link tag="li" :to="{ name: 'stockList' }">
+                <i class="fa fa-building-o"></i>
+                <span>Stocks</span>
+            </router-link>
             <router-link tag="li" :to="{ name: 'contactList' }">
                 <i class="fa fa-phone"></i>
                 <span>Contacts</span>

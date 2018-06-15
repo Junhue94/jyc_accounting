@@ -22,5 +22,9 @@
 <style scoped lang="scss">
     .panel {
         margin: 0;
+        
+        .panel-heading {
+            font-weight: bold;
+        }
     }
 </style>

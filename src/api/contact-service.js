@@ -2,8 +2,8 @@
  * API Contact Service
  */
 
-import { CONTACT_SERVICE } from '..';
-import ContactMockHook from '../_mock/contact/contact-mock-hook';
+import { CONTACT_SERVICE } from './index';
+import ContactMockHook from './_mock/contact/contact-mock-hook';
 
 class ContactService {
     constructor() {

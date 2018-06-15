@@ -3,7 +3,7 @@
  */
 
 import _ from 'lodash';
-import ContactService from '../../../api/contact/contact-service';
+import ContactService from '../../../api/contact-service';
 import { DOCTYPE_CONTACTS } from '../../../api/index';
 
 const contactService = new ContactService();
