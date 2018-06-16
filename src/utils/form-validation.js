@@ -22,4 +22,4 @@ class Validator {
     }
 }
 
-export default Validator;
+export const FormValidator = new Validator();

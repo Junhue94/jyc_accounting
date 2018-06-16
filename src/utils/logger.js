@@ -5,7 +5,7 @@
 
 import jsLogger from 'js-logger';
 
-class Logger {
+class JsLogger {
     constructor() {
         jsLogger.useDefaults();
     }
@@ -14,4 +14,4 @@ class Logger {
     }
 }
 
-export default Logger;
+export const Logger = new JsLogger();

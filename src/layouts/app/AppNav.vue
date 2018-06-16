@@ -18,6 +18,10 @@
                 <span>Contacts</span>
             </router-link>
             <li data-toggle="modal" data-target="#logout">
+                <i class="fa fa-cog"></i>
+                <span>Settings</span>
+            </li>
+            <li data-toggle="modal" data-target="#logout">
                 <i class="fa fa-sign-out"></i>
                 <span>Logout</span>
             </li>

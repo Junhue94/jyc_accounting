@@ -57,11 +57,8 @@
 <script>
     import { mapGetters, mapActions } from 'vuex';
     import { CONTACT_VIEW } from '../../api';
-    import Toastr from '../../utils/ui-toaster';
-    import Logger from '../../utils/ui-logger';
-    
-    const toastr = new Toastr();
-    const logger = new Logger();
+    import { Toast } from '../../utils/toaster';
+    import { Logger } from '../../utils/logger';
     
     export default {
         name: 'ContactList',
@@ -85,8 +82,8 @@
                         });
                     })
                     .catch((err) => {
-                        logger.error(err);
-                        toastr.callbackError();
+                        Logger.error(err);
+                        Toast.callbackError();
                     });
             }
         },

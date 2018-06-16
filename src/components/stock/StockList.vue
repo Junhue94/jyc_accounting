@@ -12,17 +12,18 @@
                 </template>
             </button-row>
             <panel>
-                <template slot="heading">STOCKS</template>
+                <template slot="heading">STOCK LIST</template>
                 <template slot="body">
                     <list-table>
                         <template slot="thead">
                             <tr>
                                 <th>Type</th>
-                                <th>Entry Date</th>
-                                <th>Exit Date</th>
                                 <th>Stock</th>
                                 <th>Country</th>
                                 <th>Sector</th>
+                                <th>Entry Date</th>
+                                <th>Exit Date</th>
+                                <th>Currency</th>
                                 <th>Price Buy</th>
                                 <th>Qty Buy</th>
                                 <th>Capital</th>
@@ -37,20 +38,21 @@
                         <template slot="tbody">
                             <tr v-for="stock in stockList">
                                 <td>{{ stock.type }}</td>
-                                <td>{{ stock.entryDate }}</td>
-                                <td>{{ stock.exitDate }}</td>
                                 <td>{{ stock.name }}</td>
                                 <td>{{ stock.country }}</td>
                                 <td>{{ stock.sector }}</td>
-                                <td>{{ stock.priceBuy }}</td>
-                                <td>{{ stock.quantityBuy }}</td>
-                                <td>{{ stock.totalCapital }}</td>
-                                <td>{{ stock.priceSell }}</td>
-                                <td>{{ stock.quantitySell }}</td>
-                                <td>{{ stock.capitalReturn }}</td>
-                                <td>{{ stock.totalDividend }}</td>
-                                <td>{{ stock.priceProfitTarget }}</td>
-                                <td>{{ stock.priceStopLoss }}</td>
+                                <td>{{ stock.entryDate }}</td>
+                                <td>{{ stock.exitDate }}</td>
+                                <td>{{ stock.currency }}</td>
+                                <td>{{ stock.priceBuy | formatPrice }}</td>
+                                <td>{{ stock.quantityBuy | formatNumber }}</td>
+                                <td>{{ stock.totalCapital | formatNumber }}</td>
+                                <td>{{ stock.priceSell | formatPrice }}</td>
+                                <td>{{ stock.quantitySell | formatNumber }}</td>
+                                <td>{{ stock.capitalReturn | formatMoney }}</td>
+                                <td>{{ stock.totalDividend | formatMoney }}</td>
+                                <td>{{ stock.priceProfitTarget | formatPrice }}</td>
+                                <td>{{ stock.priceStopLoss | formatPrice }}</td>
                             </tr>
                         </template>
                     </list-table>
@@ -62,15 +64,12 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import Toastr from '../../utils/ui-toaster';
-    import Logger from '../../utils/ui-logger';
+    import { Toast } from '../../utils/toaster';
+    import { Logger } from '../../utils/logger';
     import ListPage from '../common/ListPage';
     import ListTable from '../common/ListTable';
     import ButtonRow from '../common/ButtonRow';
     import Panel from '../common/Panel';
-
-    const toastr = new Toastr();
-    const logger = new Logger();
     
     export default {
         name: 'StockList',
@@ -87,8 +86,8 @@
             loadStockList() {
                 this.findList()
                     .catch((err) => {
-                        logger.error(err);
-                        toastr.callbackError();
+                        Logger.error(err);
+                        Toast.callbackError();
                     });
             }
         },

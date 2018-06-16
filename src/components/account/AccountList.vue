@@ -42,15 +42,12 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import Toastr from '../../utils/ui-toaster';
-    import Logger from '../../utils/ui-logger';
+    import { Toast } from '../../utils/toaster';
+    import { Logger } from '../../utils/logger';
     import ListPage from '../common/ListPage';
     import ListTable from '../common/ListTable';
     import ButtonRow from '../common/ButtonRow';
     import Panel from '../common/Panel';
-
-    const toastr = new Toastr();
-    const logger = new Logger();
     
     export default {
         name: 'AccountList',
@@ -67,8 +64,8 @@
             loadAccountList() {
                 this.findList()
                     .catch((err) => {
-                        logger.error(err);
-                        toastr.callbackError();
+                        Logger.error(err);
+                        Toast.callbackError();
                     });
             }
         },

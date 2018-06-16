@@ -12,7 +12,7 @@ export const UPDATE_STOCK = {};
 export const DELETE_STOCK = {};
 
 export const FIND_STOCK_LIST = {
-    total_rows: 5,
+    total_rows: 6,
     rows: [
         {
             _id: '1',
@@ -116,6 +116,27 @@ export const FIND_STOCK_LIST = {
             totalDividend: null,
             totalCapital: 67294.20,
             capitalReturn: null,
+            createdAt: 1535000034034,
+            updatedAt: 1535034034034
+        },
+        {
+            _id: '6',
+            type: 'Sold',
+            entryDate: '9 Sep 2017',
+            exitDate: '19 Jan 2018',
+            name: 'Blumont',
+            sector: 'Energy',
+            country: 'SG',
+            currency: 'S$',
+            priceBuy: 0.209,
+            priceSell: 0.309,
+            priceProfitTarget: null,
+            priceStopLoss: null,
+            quantityBuy: 59000,
+            quantitySell: 59000,
+            totalDividend: null,
+            totalCapital: 38042.20,
+            capitalReturn: 1902.42,
             createdAt: 1535000034034,
             updatedAt: 1535034034034
         }

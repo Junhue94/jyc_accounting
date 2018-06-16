@@ -33,4 +33,4 @@ class Toastr {
     }
 }
 
-export default Toastr;
+export const Toast = new Toastr();

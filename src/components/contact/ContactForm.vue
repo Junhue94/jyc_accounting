@@ -184,13 +184,9 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import Toastr from '../../utils/ui-toaster';
-    import Logger from '../../utils/ui-logger';
-    import Validator from '../../utils/form-validation';
-    
-    const toastr = new Toastr();
-    const logger = new Logger();
-    const validator = new Validator();
+    import { Toast } from '../../utils/toaster';
+    import { Logger } from '../../utils/logger';
+    import { FormValidator } from '../../utils/form-validation';
     
     export default {
         name: 'ContactForm',
@@ -208,20 +204,20 @@
             }),
             loadContact() {
                 this.clearState();
-                validator.resetForm(this.contactForm);
+                FormValidator.resetForm(this.contactForm);
                 
                 if (this.$route && this.$route.params && this.$route.params.id) {
                     this.setContactId(this.$route.params.id);
                     // Get Contact Details Data
                     this.get(this.$route.params.id)
                         .catch((err) => {
-                            logger.error(err);
-                            toastr.callbackError();
+                            Logger.error(err);
+                            Toast.callbackError();
                         });
                 }
             },
             createContact() {
-                if (validator.isFormValid(this.contactForm)) {
+                if (FormValidator.isFormValid(this.contactForm)) {
                     this.create(this.contactDetails)
                         .then((res) => {
                             return this.$router.push({
@@ -229,23 +225,23 @@
                             });
                         })
                         .then((res) => {
-                            return toastr.success('Create Contact', 'Successfully created');
+                            return Toast.success('Create Contact', 'Successfully created');
                         })
                         .catch((err) => {
-                            logger.error(err);
-                            toastr.callbackError();
+                            Logger.error(err);
+                            Toast.callbackError();
                         });
                 }
             },
             updateContactDetails() {
-                if (validator.isFormValid(this.contactForm)) {
+                if (FormValidator.isFormValid(this.contactForm)) {
                     this.update(this.contactDetails)
                         .then((res) => {
-                            return toastr.success('Update Contact Details', 'Successfully updated');
+                            return Toast.success('Update Contact Details', 'Successfully updated');
                         })
                         .catch((err) => {
-                            logger.error(err);
-                            toastr.callbackError();
+                            Logger.error(err);
+                            Toast.callbackError();
                         });
                 }
             },
@@ -257,11 +253,11 @@
                         });
                     })
                     .then((res) => {
-                        return toastr.success('Remove Contact', 'Successfully removed');
+                        return Toast.success('Remove Contact', 'Successfully removed');
                     })
                     .catch((err) => {
-                        logger.error(err);
-                        toastr.callbackError();
+                        Logger.error(err);
+                        Toast.callbackError();
                     });
             }
         },
