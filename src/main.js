@@ -19,7 +19,7 @@ import App from './App';
 import filters from './filters';
 import router from './router';
 import store from './store';
-import ValidatePlugin from './plugins/validate.plugin';
+import ValidatePlugin from './plugins/formValidation';
 import DatePicker from 'vue-bootstrap-datetimepicker';
 import BootstrapVue from 'bootstrap-vue';
 

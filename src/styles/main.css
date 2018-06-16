@@ -16,3 +16,26 @@ body {
     color: #767676;
     background-color: #eaeaea;
 }
+
+/*
+* CLASS .has-error (Form Validator)
+*/
+.has-error .form-control,
+.has-error .form-control:focus {
+    border-color: red;
+}
+.has-error .checkbox,
+.has-error .checkbox-inline,
+.has-error .control-label,
+.has-error .help-block,
+.has-error .radio,
+.has-error .radio-inline,
+.has-error.checkbox label,
+.has-error.checkbox-inline label,
+.has-error.radio label,
+.has-error.radio-inline label {
+    margin: 3px 0 0 0;
+    color: red;
+    font-style: italic;
+    font-size: 12px;
+}

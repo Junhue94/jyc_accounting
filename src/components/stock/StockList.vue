@@ -15,46 +15,45 @@
                 <template slot="heading">STOCK LIST</template>
                 <template slot="body">
                     <list-table>
-                        <template slot="thead">
-                            <tr>
-                                <th>Type</th>
-                                <th>Stock</th>
-                                <th>Country</th>
-                                <th>Sector</th>
-                                <th>Entry Date</th>
-                                <th>Exit Date</th>
-                                <th>Currency</th>
-                                <th>Price Buy</th>
-                                <th>Qty Buy</th>
-                                <th>Capital</th>
-                                <th>Price Sell</th>
-                                <th>Qty Sell</th>
-                                <th>Capital Return</th>
-                                <th>Dividend</th>
-                                <th>Profit Target</th>
-                                <th>Stop Loss</th>
-                            </tr>
-                        </template>
-                        <template slot="tbody">
-                            <tr v-for="stock in stockList">
-                                <td>{{ stock.type }}</td>
-                                <td>{{ stock.name }}</td>
-                                <td>{{ stock.country }}</td>
-                                <td>{{ stock.sector }}</td>
-                                <td>{{ stock.entryDate }}</td>
-                                <td>{{ stock.exitDate }}</td>
-                                <td>{{ stock.currency }}</td>
-                                <td>{{ stock.priceBuy | formatPrice }}</td>
-                                <td>{{ stock.quantityBuy | formatNumber }}</td>
-                                <td>{{ stock.totalCapital | formatNumber }}</td>
-                                <td>{{ stock.priceSell | formatPrice }}</td>
-                                <td>{{ stock.quantitySell | formatNumber }}</td>
-                                <td>{{ stock.capitalReturn | formatMoney }}</td>
-                                <td>{{ stock.totalDividend | formatMoney }}</td>
-                                <td>{{ stock.priceProfitTarget | formatPrice }}</td>
-                                <td>{{ stock.priceStopLoss | formatPrice }}</td>
-                            </tr>
-                        </template>
+                        <tr slot="thead">
+                            <th>Type</th>
+                            <th>Stock</th>
+                            <th>Country</th>
+                            <th>Sector</th>
+                            <th>Entry Date</th>
+                            <th>Exit Date</th>
+                            <th>Currency</th>
+                            <th>Price Buy</th>
+                            <th>Qty Buy</th>
+                            <th>Capital</th>
+                            <th>Price Sell</th>
+                            <th>Qty Sell</th>
+                            <th>Capital Return</th>
+                            <th>Dividend</th>
+                            <th>Profit Target</th>
+                            <th>Stop Loss</th>
+                        </tr>
+                        <tr
+                            slot="tbody" v-for="stock in stockList"
+                            @click="routeToStockEdit(stock._id)"
+                        >
+                            <td>{{ stock.type }}</td>
+                            <td>{{ stock.name }}</td>
+                            <td>{{ stock.country }}</td>
+                            <td>{{ stock.sector }}</td>
+                            <td>{{ stock.entryDate | fullDate }}</td>
+                            <td>{{ stock.exitDate | fullDate }}</td>
+                            <td>{{ stock.currency }}</td>
+                            <td>{{ stock.priceBuy | price }}</td>
+                            <td>{{ stock.quantityBuy | number }}</td>
+                            <td>{{ stock.totalCapital | money }}</td>
+                            <td>{{ stock.priceSell | price }}</td>
+                            <td>{{ stock.quantitySell | number }}</td>
+                            <td>{{ stock.capitalReturn | money }}</td>
+                            <td>{{ stock.totalDividend | money }}</td>
+                            <td>{{ stock.priceProfitTarget | price }}</td>
+                            <td>{{ stock.priceStopLoss | price }}</td>
+                        </tr>
                     </list-table>
                 </template>
             </panel>
@@ -89,6 +88,12 @@
                         Logger.error(err);
                         Toast.callbackError();
                     });
+            },
+            routeToStockEdit(id) {
+                this.$router.push({
+                    name: 'stockEdit',
+                    params: { id }
+                });
             }
         },
         computed: {

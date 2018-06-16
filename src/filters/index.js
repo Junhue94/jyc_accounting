@@ -1,13 +1,17 @@
 import {
-    formatNumber,
-    formatMoney,
-    formatPrice
+    number,
+    money,
+    price
 } from './number';
+import {
+    fullDate
+} from './date';
 
 export default {
     install(Vue) {
-        Vue.filter('formatNumber', formatNumber);
-        Vue.filter('formatMoney', formatMoney);
-        Vue.filter('formatPrice', formatPrice);
+        Vue.filter('number', number);
+        Vue.filter('money', money);
+        Vue.filter('price', price);
+        Vue.filter('fullDate', fullDate);
     }
 };

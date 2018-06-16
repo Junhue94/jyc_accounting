@@ -9,7 +9,28 @@ const stockService = new StockService();
 
 const initialState = {
     stockId: null,
-    stockDetails: {},
+    stockDetails: {
+        _id: null,
+        type: null,
+        entryDate: null,
+        exitDate: null,
+        name: null,
+        sector: null,
+        country: null,
+        currency: null,
+        priceBuy: null,
+        priceSell: null,
+        priceProfitTarget: null,
+        priceStopLoss: null,
+        quantityBuy: null,
+        quantitySell: null,
+        totalDividend: null,
+        totalCapital: null,
+        capitalReturn: null,
+        createdAt: null,
+        updatedAt: null,
+        deleted: false
+    },
     stockList: []
 };
 
@@ -21,12 +42,13 @@ const mutations = {
         state.stockId = stockId;
     },
     'SET_STOCK_DETAILS' (state, stockDetails) {
-        state.stockDetails = Object.assign({}, state.stockDetails, stockDetails);
+        state.stockDetails = { ...stockDetails };
     },
     'SET_STOCK_LIST' (state, stockList) {
         state.stockList = stockList;
     },
     'CLEAR_ALL_STATE' (state) {
+        console.log('initialState.stockDetails', initialState.stockDetails);
         state.stockId = _.cloneDeep(initialState.stockId);
         state.stockDetails = _.cloneDeep(initialState.stockDetails);
         state.stockList = _.cloneDeep(initialState.stockList);
@@ -58,7 +80,7 @@ const actions = {
     },
     deleteStock({ commit }, stockId) {
         return stockService.deleteStock(stockId)
-            .then((res) => {
+            .then(() => {
                 commit('CLEAR_ALL_STATE');
             });
     },

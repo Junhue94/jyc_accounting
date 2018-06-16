@@ -28,19 +28,15 @@ const countDecimals = (value) => {
 };
 
 // formatted with separated thousands
-export function formatNumber(number) {
-    return accounting.formatNumber(number);
-}
+export const number = number => accounting.formatNumber(number);
 
 // formatted with separated thousands, two decimal places and currency
-export function formatMoney(amount, currency) {
-    return accounting.formatMoney(amount, currency);
-}
+export const money = (amount, currency) => accounting.formatMoney(amount, currency);
 
-export function formatPrice(price, currency) {
+export const price = (price, currency) => {
     const priceDecimalPlace = countDecimals(price || 0);
     if (priceDecimalPlace > 2) {
         return accounting.formatMoney(price, currency, priceDecimalPlace);
     }
     return accounting.formatMoney(price, currency);
-}
+};

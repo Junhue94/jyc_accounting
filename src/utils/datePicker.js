@@ -4,7 +4,7 @@
 
 import moment from 'moment';
 
-class DatePicker {
+class DatePickerClass {
     constructor() {
     
     }
@@ -28,4 +28,4 @@ class DatePicker {
     }
 }
 
-export default DatePicker;
+export const DatePicker = new DatePickerClass();

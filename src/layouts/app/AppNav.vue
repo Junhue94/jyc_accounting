@@ -13,10 +13,6 @@
                 <i class="fa fa-building-o"></i>
                 <span>Stocks</span>
             </router-link>
-            <router-link tag="li" :to="{ name: 'contactList' }">
-                <i class="fa fa-phone"></i>
-                <span>Contacts</span>
-            </router-link>
             <li data-toggle="modal" data-target="#logout">
                 <i class="fa fa-cog"></i>
                 <span>Settings</span>

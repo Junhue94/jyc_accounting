@@ -8,7 +8,6 @@ import VueRouter from 'vue-router';
 import { routeLogin } from './login';
 import { routeAccount } from './account';
 import { routeStock } from './stock';
-import { routeContact } from './contact';
 
 // Layouts
 import AppLayout from '../layouts/app/AppLayout.vue';
@@ -35,7 +34,6 @@ export default new VueRouter({
             children: [
                 ...routeAccount,
                 ...routeStock,
-                ...routeContact,
                 {
                     path: '',
                     name: 'index',

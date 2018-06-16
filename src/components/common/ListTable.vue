@@ -33,6 +33,8 @@
         
         tbody {
             tr {
+                cursor: pointer;
+                
                 td {
                     text-align: center;
                     vertical-align: middle;
