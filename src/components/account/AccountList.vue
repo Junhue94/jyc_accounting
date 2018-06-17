@@ -20,20 +20,20 @@
             <panel>
                 <template slot="heading">ACCOUNTS</template>
                 <template slot="body">
-                    <list-table>
-                        <template slot="thead">
-                            <tr>
-                                <th>Name</th>
-                                <th>Total</th>
-                            </tr>
-                        </template>
-                        <template slot="tbody">
-                            <tr v-for="account in accountList">
-                                <td>{{ account.name}}</td>
-                                <td></td>
-                            </tr>
-                        </template>
-                    </list-table>
+                    <!--<list-table>-->
+                        <!--<template slot="thead">-->
+                            <!--<tr>-->
+                                <!--<th>Name</th>-->
+                                <!--<th>Total</th>-->
+                            <!--</tr>-->
+                        <!--</template>-->
+                        <!--<template slot="tbody">-->
+                            <!--<tr v-for="account in accountList">-->
+                                <!--<td>{{ account.name}}</td>-->
+                                <!--<td></td>-->
+                            <!--</tr>-->
+                        <!--</template>-->
+                    <!--</list-table>-->
                 </template>
             </panel>
         </template>

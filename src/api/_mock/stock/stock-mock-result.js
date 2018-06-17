@@ -240,7 +240,7 @@ export const FIND_STOCK_LIST = params => {
     return {
         offset,
         currentPage,
-        totalRows: 250,
+        totalRows: 500,
         totalPage: 5,
         data
     };

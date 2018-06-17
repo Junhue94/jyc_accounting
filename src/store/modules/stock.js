@@ -76,7 +76,6 @@ const actions = {
             });
     },
     findStockList({ commit }, options) {
-        console.log('options', options);
         return stockService.findStockList(options)
             .then((res) => {
                 commit('SET_STOCK_PAGINATION', getPaginationDetails(res));

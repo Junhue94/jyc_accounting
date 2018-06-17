@@ -44,20 +44,31 @@
             <div class="col-sm-8">
                 <nav class="pull-right">
                     <ul class="pagination">
-                        <li class="active">
-                            <a><span>&laquo;</span></a>
+                        <li
+                            :class="{ active: isFirstPage }"
+                            @click="changePage(1)"
+                        ><a><span>&laquo;</span></a>
                         </li>
-                        <li class="disabled">
-                            <a><span>&nbsp;&lsaquo;</span></a>
+                        <li
+                            :class="{ disabled: isFirstPage }"
+                            @click="changePage('previous')"
+                        ><a><span>&nbsp;&lsaquo;</span></a>
                         </li>
-                        <li v-for="page in paginationDetails.totalPage">
-                            <a>{{ page }}</a>
+                        <li
+                            v-for="page in pageRange"
+                            :class="{ active: page === paginationDetails.currentPage }"
+                            @click="changePage(page)"
+                        ><a>{{ page }}</a>
                         </li>
-                        <li>
-                            <a><span>&rsaquo;&nbsp;</span></a>
+                        <li
+                            :class="{ disabled: isLastPage }"
+                            @click="changePage('next')"
+                        ><a><span>&rsaquo;&nbsp;</span></a>
                         </li>
-                        <li>
-                            <a><span>&raquo;</span></a>
+                        <li
+                            :class="{ active: isLastPage }"
+                            @click="changePage(paginationDetails.totalPage)"
+                        ><a><span>&raquo;</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -68,6 +79,7 @@
 
 <script>
     import Vue from 'vue';
+    import _ from 'lodash';
     
     export default {
         name: 'ListTable',
@@ -81,7 +93,10 @@
         data() {
             return {
                 sortField: null,
-                sortSeq: null
+                sortSeq: null,
+                isFirstPage: true,
+                isLastPage: false,
+                pageRange: []
             };
         },
         watch: {
@@ -89,9 +104,27 @@
             'paginationDetails.offset'(newValue, oldValue) {
                 if (parseInt(newValue) !== parseInt(oldValue)) {
                     // set to first page when offset changes
-                    this.findList({ offset: parseInt(newValue), currentPage: 1 });
+                    return this.findList({ offset: parseInt(newValue), currentPage: 1 });
+                }
+            },
+            // watch current page to disable pagination buttons
+            'paginationDetails.currentPage'(newValue) {
+                const { totalPage } = this.paginationDetails;
+                if (parseInt(newValue) === 1) {
+                    this.isFirstPage = true;
+                }
+                else if (this.isFirstPage) {
+                    this.isFirstPage = false;
+                }
+    
+                if (parseInt(newValue) === totalPage) {
+                    this.isLastPage = true;
+                }
+                else if (this.isLastPage) {
+                    this.isLastPage = false;
                 }
             }
+            
         },
         methods: {
             dataFilter(filter, value) {
@@ -118,7 +151,45 @@
                     this.sortSeq = 'asc';
                 }
                 return this.sortSeq;
+            },
+            changePage(page) {
+                const { offset, currentPage, totalPage } = this.paginationDetails;
+                let newPage;
+                
+                // set page number
+                if (page === 'previous') {
+                    newPage = currentPage - 1;
+                }
+                else if (page === 'next') {
+                    newPage = currentPage + 1;
+                }
+                else {
+                    newPage = page;
+                }
+                
+                // set page range
+                if (totalPage <= 5) {
+                    this.pageRange = _.range(1, totalPage + 1);
+                }
+                else if (newPage + 2 >= totalPage) {
+                    const pages = (newPage - 2 <= totalPage - 4) ? newPage - 2 : totalPage - 4;
+                    this.pageRange = _.range(pages, totalPage + 1);
+                }
+                else if (newPage - 2 <= 1) {
+                    const pages = (newPage + 3 >= 6) ? newPage + 3 : 6;
+                    this.pageRange = _.range(1, pages);
+                }
+                else {
+                    this.pageRange = _.range(newPage - 2, newPage + 3);
+                }
+                
+                if (newPage >= 1 && newPage <= totalPage && newPage !== currentPage) {
+                    return this.findList({ offset, currentPage: newPage });
+                }
             }
+        },
+        created() {
+            this.changePage(1);
         }
     };
 </script>

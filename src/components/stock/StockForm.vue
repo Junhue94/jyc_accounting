@@ -304,8 +304,7 @@
             createStock() {
                 if (FormValidator.isFormValid(this.stockForm)) {
                     this.create(this.stockDetails)
-                        .then((res) => {
-                            console.log(2, res);
+                        .then(() => {
                             return this.$router.push({
                                 name: 'stockList'
                             });
