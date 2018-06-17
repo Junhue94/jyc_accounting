@@ -303,7 +303,6 @@
             },
             createStock() {
                 if (FormValidator.isFormValid(this.stockForm)) {
-                    console.log(1, this.stockDetails);
                     this.create(this.stockDetails)
                         .then((res) => {
                             console.log(2, res);

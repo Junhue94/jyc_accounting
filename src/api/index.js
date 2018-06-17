@@ -29,7 +29,6 @@ export const SERVER_URL = process.env.NODE_ENV === 'production'
  * Feathers Services
  */
 export const AUTH_SERVICE = feathersClient.service('auth');
-export const CONTACT_SERVICE = feathersClient.service('contact');
 export const ACCOUNT_SERVICE = feathersClient.service('account');
 export const STOCK_SERVICE = feathersClient.service('stock');
 
@@ -38,14 +37,3 @@ export const STOCK_SERVICE = feathersClient.service('stock');
  */
 export const ACCOUNT_TABLE = 'Account';
 export const STOCK_TABLE = 'Stock';
-
-/**
- * Mock Cloudant Views
- */
-export const CONTACT_VIEW = 'contact';
-
-/**
- * List of all DOCTYPE in API
- * @type {string}
- */
-export const DOCTYPE_CONTACTS = 'contacts';

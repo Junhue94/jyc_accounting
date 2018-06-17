@@ -46,7 +46,7 @@ const actions = {
     findAccountList({ commit }, options) {
         return accountService.findAccountList(options)
             .then((res) => {
-                commit('SET_ACCOUNT_LIST', res.rows);
+                commit('SET_ACCOUNT_LIST', res.data);
                 return res;
             });
     },

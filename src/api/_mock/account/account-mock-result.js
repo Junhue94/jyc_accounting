@@ -13,7 +13,7 @@ export const DELETE_ACCOUNT = {};
 
 export const FIND_ACCOUNT_LIST = {
     total_rows: 10,
-    rows: [
+    data: [
         {
             _id: '1',
             type: 'Asset',

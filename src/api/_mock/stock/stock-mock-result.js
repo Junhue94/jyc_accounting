@@ -1,8 +1,9 @@
+import _ from 'lodash';
+
 /**
  * Stock Mock Result
  * For Mock API Calls and Unit Tests
  */
-
 export const CREATE_STOCK = {
     _id: '1',
     type: 'Current',
@@ -95,9 +96,9 @@ export const DELETE_STOCK = {
     deleted: true
 };
 
-export const FIND_STOCK_LIST = {
-    total_rows: 6,
-    rows: [
+export const FIND_STOCK_LIST = params => {
+    const { offset = 50, currentPage = 1, sortField, sortSeq } = params;
+    let data = [
         {
             _id: '1',
             type: 'Current',
@@ -230,5 +231,17 @@ export const FIND_STOCK_LIST = {
             updatedAt: 1535034034034,
             deleted: false
         }
-    ]
+    ];
+    
+    if (sortField && sortSeq) {
+        data = _.orderBy(data, [sortField], [sortSeq]);
+    }
+    
+    return {
+        offset,
+        currentPage,
+        totalRows: 250,
+        totalPage: 5,
+        data
+    };
 };

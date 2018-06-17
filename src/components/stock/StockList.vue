@@ -14,46 +14,13 @@
             <panel>
                 <template slot="heading">STOCK LIST</template>
                 <template slot="body">
-                    <list-table>
-                        <tr slot="thead">
-                            <th>Type</th>
-                            <th>Stock</th>
-                            <th>Country</th>
-                            <th>Sector</th>
-                            <th>Entry Date</th>
-                            <th>Exit Date</th>
-                            <th>Currency</th>
-                            <th>Price Buy</th>
-                            <th>Qty Buy</th>
-                            <th>Capital</th>
-                            <th>Price Sell</th>
-                            <th>Qty Sell</th>
-                            <th>Capital Return</th>
-                            <th>Dividend</th>
-                            <th>Profit Target</th>
-                            <th>Stop Loss</th>
-                        </tr>
-                        <tr
-                            slot="tbody" v-for="stock in stockList"
-                            @click="routeToStockEdit(stock._id)"
-                        >
-                            <td>{{ stock.type }}</td>
-                            <td>{{ stock.name }}</td>
-                            <td>{{ stock.country }}</td>
-                            <td>{{ stock.sector }}</td>
-                            <td>{{ stock.entryDate | fullDate }}</td>
-                            <td>{{ stock.exitDate | fullDate }}</td>
-                            <td>{{ stock.currency }}</td>
-                            <td>{{ stock.priceBuy | price }}</td>
-                            <td>{{ stock.quantityBuy | number }}</td>
-                            <td>{{ stock.totalCapital | money }}</td>
-                            <td>{{ stock.priceSell | price }}</td>
-                            <td>{{ stock.quantitySell | number }}</td>
-                            <td>{{ stock.capitalReturn | money }}</td>
-                            <td>{{ stock.totalDividend | money }}</td>
-                            <td>{{ stock.priceProfitTarget | price }}</td>
-                            <td>{{ stock.priceStopLoss | price }}</td>
-                        </tr>
+                    <list-table
+                        :headerList="stockListHeaders"
+                        :dataList="stockList"
+                        :dataListClick="routeToStockEdit"
+                        :findList="loadStockList"
+                        :paginationDetails="stockPagination"
+                    >
                     </list-table>
                 </template>
             </panel>
@@ -62,7 +29,7 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions } from 'vuex';
+    import { mapState, mapGetters, mapActions } from 'vuex';
     import { Toast } from '../../utils/toaster';
     import { Logger } from '../../utils/logger';
     import ListPage from '../common/ListPage';
@@ -78,12 +45,96 @@
             ButtonRow,
             Panel
         },
+        data() {
+            return {
+                stockListHeaders: [
+                    {
+                        field: 'type',
+                        name: 'Type'
+                    },
+                    {
+                        field: 'name',
+                        name: 'Stock'
+                    },
+                    {
+                        field: 'country',
+                        name: 'Country'
+                    },
+                    {
+                        field: 'sector',
+                        name: 'Sector'
+                    },
+                    {
+                        field: 'entryDate',
+                        name: 'Entry Date',
+                        filter: 'fullDate'
+                    },
+                    {
+                        field: 'exitDate',
+                        name: 'Exit Date',
+                        filter: 'fullDate'
+                    },
+                    {
+                        field: 'currency',
+                        name: 'Currency'
+                    },
+                    {
+                        field: 'priceBuy',
+                        name: 'Price Buy',
+                        filter: 'price'
+                    },
+                    {
+                        field: 'quantityBuy',
+                        name: 'Qty Buy',
+                        filter: 'number'
+                    },
+                    {
+                        field: 'totalCapital',
+                        name: 'Capital',
+                        filter: 'money'
+                    },
+                    {
+                        field: 'priceSell',
+                        name: 'Price Sell',
+                        filter: 'price'
+                    },
+                    {
+                        field: 'quantitySell',
+                        name: 'Qty Sell',
+                        filter: 'number'
+                    },
+                    {
+                        field: 'capitalReturn',
+                        name: 'Capital Return',
+                        filter: 'money'
+                    },
+                    {
+                        field: 'totalDividend',
+                        name: 'Dividend',
+                        filter: 'money'
+                    },
+                    {
+                        field: 'priceProfitTarget',
+                        name: 'Profit Target',
+                        filter: 'price'
+                    },
+                    {
+                        field: 'priceStopLoss',
+                        name: 'Stop Loss',
+                        filter: 'price'
+                    }
+                ]
+            };
+        },
         methods: {
+            ...mapState('stock', {
+                stockPaginationState: 'stockPagination'
+            }),
             ...mapActions('stock', {
                 findList: 'findStockList'
             }),
-            loadStockList() {
-                this.findList()
+            loadStockList(options) {
+                this.findList(options)
                     .catch((err) => {
                         Logger.error(err);
                         Toast.callbackError();
@@ -98,14 +149,19 @@
         },
         computed: {
             ...mapGetters('stock', {
-                fetchStockList: 'stockList'
+                fetchStockList: 'stockList',
+                fetchStockPagination: 'stockPagination'
             }),
             stockList() {
                 return this.fetchStockList;
+            },
+            stockPagination() {
+                return this.fetchStockPagination;
             }
         },
         created() {
-            this.loadStockList();
+            const { offset, currentPage } = this.stockPagination;
+            this.loadStockList({ offset, currentPage });
         }
     };
 </script>

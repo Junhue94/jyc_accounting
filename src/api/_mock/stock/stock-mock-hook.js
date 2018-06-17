@@ -28,7 +28,7 @@ export const StockMockHook = {
             hook.result = DELETE_STOCK;
         },
         find(hook) {
-            hook.result = FIND_STOCK_LIST;
+            hook.result = FIND_STOCK_LIST(hook.params);
         }
     }
 };

@@ -4,6 +4,7 @@
 
 import _ from 'lodash';
 import StockService from '../../api/stock-service';
+import { getPaginationDetails } from '../../utils/helper';
 
 const stockService = new StockService();
 
@@ -31,7 +32,13 @@ const initialState = {
         updatedAt: null,
         deleted: false
     },
-    stockList: []
+    stockList: [],
+    stockPagination: {
+        offset: 50,
+        totalRows: null,
+        currentPage: 1,
+        totalPage: null
+    }
 };
 
 
@@ -47,11 +54,14 @@ const mutations = {
     'SET_STOCK_LIST' (state, stockList) {
         state.stockList = stockList;
     },
+    'SET_STOCK_PAGINATION' (state, stockPagination) {
+        state.stockPagination = { ...stockPagination };
+    },
     'CLEAR_ALL_STATE' (state) {
-        console.log('initialState.stockDetails', initialState.stockDetails);
         state.stockId = _.cloneDeep(initialState.stockId);
         state.stockDetails = _.cloneDeep(initialState.stockDetails);
         state.stockList = _.cloneDeep(initialState.stockList);
+        state.stockPagination = _.cloneDeep(initialState.stockPagination);
     }
 };
 
@@ -66,9 +76,11 @@ const actions = {
             });
     },
     findStockList({ commit }, options) {
+        console.log('options', options);
         return stockService.findStockList(options)
             .then((res) => {
-                commit('SET_STOCK_LIST', res.rows);
+                commit('SET_STOCK_PAGINATION', getPaginationDetails(res));
+                commit('SET_STOCK_LIST', res.data);
                 return res;
             });
     },
@@ -101,6 +113,9 @@ const getters = {
     },
     stockList: (state) => {
         return state.stockList;
+    },
+    stockPagination: (state) => {
+        return state.stockPagination;
     }
 };
 
