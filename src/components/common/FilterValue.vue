@@ -9,7 +9,7 @@
                 <select
                     class="form-control"
                     title=""
-                    v-model="filter.equal"
+                    v-model="filter.eq"
                     @change="onFilterChange({ filter })"
                 >
                     <option value="">All</option>

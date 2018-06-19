@@ -23,7 +23,7 @@ module.exports = config => {
             // Do not print information about failed tests
             suppressFailed: false,
             // Do not print information about passed tests
-            suppressPassed: false,
+            suppressPassed: true,
             // Do not print information about skipped tests
             suppressSkipped: true,
             // Print the time elapsed for each spec

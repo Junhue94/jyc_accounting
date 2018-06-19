@@ -140,19 +140,19 @@
                         field: 'type',
                         name: 'Type',
                         selection: enumStockType,
-                        equal: ''
+                        eq: ''
                     },
                     {
                         field: 'country',
                         name: 'Country',
                         selection: enumCountry,
-                        equal: ''
+                        eq: ''
                     },
                     {
                         field: 'sector',
                         name: 'Sector',
                         selection: enumStockSector,
-                        equal: ''
+                        eq: ''
                     }
                 ]
             };
