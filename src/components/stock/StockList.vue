@@ -14,12 +14,16 @@
             <panel>
                 <template slot="heading">STOCK LIST</template>
                 <template slot="body">
+                    <filter-value
+                        :filters="stockListFilters"
+                        :onFilterChange="loadStockList"
+                    ></filter-value>
                     <list-table
                         :headerList="stockListHeaders"
                         :dataList="stockList"
-                        :dataListClick="routeToStockEdit"
+                        :onDataListClick="routeToStockEdit"
                         :findList="loadStockList"
-                        :paginationDetails="stockPagination"
+                        :queryParams="stockListParams"
                     >
                     </list-table>
                 </template>
@@ -29,13 +33,19 @@
 </template>
 
 <script>
-    import { mapState, mapGetters, mapActions } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex';
     import { Toast } from '../../utils/toaster';
     import { Logger } from '../../utils/logger';
     import ListPage from '../common/ListPage';
     import ListTable from '../common/ListTable';
     import ButtonRow from '../common/ButtonRow';
     import Panel from '../common/Panel';
+    import FilterValue from '../common/FilterValue';
+    import {
+        enumStockType,
+        enumStockSector,
+        enumCountry
+    } from '../../utils/enum';
     
     export default {
         name: 'StockList',
@@ -43,7 +53,8 @@
             ListPage,
             ListTable,
             ButtonRow,
-            Panel
+            Panel,
+            FilterValue
         },
         data() {
             return {
@@ -123,13 +134,30 @@
                         name: 'Stop Loss',
                         filter: 'price'
                     }
+                ],
+                stockListFilters: [
+                    {
+                        field: 'type',
+                        name: 'Type',
+                        selection: enumStockType,
+                        equal: ''
+                    },
+                    {
+                        field: 'country',
+                        name: 'Country',
+                        selection: enumCountry,
+                        equal: ''
+                    },
+                    {
+                        field: 'sector',
+                        name: 'Sector',
+                        selection: enumStockSector,
+                        equal: ''
+                    }
                 ]
             };
         },
         methods: {
-            ...mapState('stock', {
-                stockPaginationState: 'stockPagination'
-            }),
             ...mapActions('stock', {
                 findList: 'findStockList'
             }),
@@ -150,17 +178,17 @@
         computed: {
             ...mapGetters('stock', {
                 fetchStockList: 'stockList',
-                fetchStockPagination: 'stockPagination'
+                fetchStockListParams: 'stockListParams'
             }),
             stockList() {
                 return this.fetchStockList;
             },
-            stockPagination() {
-                return this.fetchStockPagination;
+            stockListParams() {
+                return this.fetchStockListParams;
             }
         },
         created() {
-            const { offset, currentPage } = this.stockPagination;
+            const { offset, currentPage } = this.stockListParams;
             this.loadStockList({ offset, currentPage });
         }
     };

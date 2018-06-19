@@ -14,7 +14,7 @@
                 <tbody>
                 <tr
                     v-for="data in dataList"
-                    @click="dataListClick(data._id)"
+                    @click="onDataListClick(data._id)"
                 >
                     <td
                         v-for="header in headerList"
@@ -32,7 +32,7 @@
                     <select
                         class="form-control"
                         title="rowOffset"
-                        v-model="paginationDetails.offset"
+                        v-model="queryParams.offset"
                     >
                         <option value="50">50</option>
                         <option value="100">100</option>
@@ -56,7 +56,7 @@
                         </li>
                         <li
                             v-for="page in pageRange"
-                            :class="{ active: page === paginationDetails.currentPage }"
+                            :class="{ active: page === queryParams.currentPage }"
                             @click="changePage(page)"
                         ><a>{{ page }}</a>
                         </li>
@@ -67,7 +67,7 @@
                         </li>
                         <li
                             :class="{ active: isLastPage }"
-                            @click="changePage(paginationDetails.totalPage)"
+                            @click="changePage(queryParams.totalPage)"
                         ><a><span>&raquo;</span></a>
                         </li>
                     </ul>
@@ -86,9 +86,9 @@
         props: [
             'headerList',
             'dataList',
-            'dataListClick',
+            'onDataListClick',
             'findList',
-            'paginationDetails'
+            'queryParams'
         ],
         data() {
             return {
@@ -101,15 +101,15 @@
         },
         watch: {
             // watch page offset to fetch data from API
-            'paginationDetails.offset'(newValue, oldValue) {
+            'queryParams.offset'(newValue, oldValue) {
                 if (parseInt(newValue) !== parseInt(oldValue)) {
                     // set to first page when offset changes
                     return this.findList({ offset: parseInt(newValue), currentPage: 1 });
                 }
             },
             // watch current page to disable pagination buttons
-            'paginationDetails.currentPage'(newValue) {
-                const { totalPage } = this.paginationDetails;
+            'queryParams.currentPage'(newValue) {
+                const { totalPage } = this.queryParams;
                 if (parseInt(newValue) === 1) {
                     this.isFirstPage = true;
                 }
@@ -153,7 +153,7 @@
                 return this.sortSeq;
             },
             changePage(page) {
-                const { offset, currentPage, totalPage } = this.paginationDetails;
+                const { offset, currentPage, totalPage } = this.queryParams;
                 let newPage;
                 
                 // set page number

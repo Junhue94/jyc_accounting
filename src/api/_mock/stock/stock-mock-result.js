@@ -97,7 +97,7 @@ export const DELETE_STOCK = {
 };
 
 export const FIND_STOCK_LIST = params => {
-    const { offset = 50, currentPage = 1, sortField, sortSeq } = params;
+    const { offset = 50, currentPage = 1, sortField, sortSeq, filter } = params;
     let data = [
         {
             _id: '1',
@@ -242,6 +242,9 @@ export const FIND_STOCK_LIST = params => {
         currentPage,
         totalRows: 500,
         totalPage: 5,
+        sortField,
+        sortSeq,
+        filter,
         data
     };
 };

@@ -14,7 +14,7 @@ import { SERVER_URL } from './index';
 
 const feathersClient = feathers()
     .configure(hooks())
-    .configure(rest(SERVER_URL).jquery(jQuery))
-    .configure(auth({ storage: localStorage }));
+    .configure(rest(SERVER_URL).jquery(jQuery));
+    // .configure(auth({ storage: localStorage }));
 
 export default feathersClient;
