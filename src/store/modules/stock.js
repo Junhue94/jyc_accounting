@@ -78,14 +78,6 @@ const actions = {
                 commit('SET_STOCK_DETAILS', res);
             });
     },
-    findStockList({ commit }, options) {
-        return stockService.findStockList(options)
-            .then((res) => {
-                commit('SET_STOCK_LIST_PARAMS', getQueryParams(res));
-                commit('SET_STOCK_LIST', res.data);
-                return res;
-            });
-    },
     updateStockDetails({ commit }, stockDetails) {
         return stockService.updateStockDetails(stockDetails)
             .then((res) => {
@@ -96,6 +88,14 @@ const actions = {
         return stockService.deleteStock(stockId)
             .then(() => {
                 commit('CLEAR_ALL_STATE');
+            });
+    },
+    findStockList({ commit }, options) {
+        return stockService.findStockList(options)
+            .then((res) => {
+                commit('SET_STOCK_LIST', res.data);
+                commit('SET_STOCK_LIST_PARAMS', getQueryParams(res));
+                return res;
             });
     },
     setStockId({ commit }, stockId) {
