@@ -15,3 +15,5 @@ export const getQueryData = (result) => {
 export const getQueryParams = (result) => {
     return _.omit(result, 'data');
 };
+
+export const returnTrue = () => true;

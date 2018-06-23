@@ -4,14 +4,6 @@
  */
 
 import jsLogger from 'js-logger';
+jsLogger.useDefaults();
 
-class JsLogger {
-    constructor() {
-        jsLogger.useDefaults();
-    }
-    error(message) {
-        return jsLogger.error(message);
-    }
-}
-
-export const Logger = new JsLogger();
+export const logError = message => jsLogger.error(message);

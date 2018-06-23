@@ -4,6 +4,7 @@
             <button-row>
                 <template slot="button">
                     <button
+                        id="stock-details-update-btn"
                         class="btn btn-success"
                         @click="updateStockDetails"
                         v-if="stockId"
@@ -17,6 +18,7 @@
                     >Delete Stock
                     </button>
                     <button
+                        id="stock-details-create-btn"
                         class="btn btn-primary"
                         @click="createStock"
                         v-else
@@ -242,10 +244,10 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import { Toast } from '../../utils/toaster';
-    import { Logger } from '../../utils/logger';
-    import { DatePicker } from '../../utils/datePicker';
-    import { FormValidator } from '../../utils/formValidation';
+    import { toastServerError, toastSuccess } from '../../utils/toaster';
+    import { logError } from '../../utils/logger';
+    import { dateFormat } from '../../utils/datePicker';
+    import { validateForm, resetForm } from '../../utils/formValidation';
     import { generateModalId } from '../../utils/helper';
     import ListPage from '../common/ListPage';
     import ListTable from '../common/ListTable';
@@ -276,7 +278,7 @@
                 enumCountry,
                 enumCurrency,
                 enumStockSector,
-                dateFormat: DatePicker.dateFormat()
+                dateFormat: dateFormat()
             };
         },
         methods: {
@@ -290,19 +292,19 @@
             }),
             loadStock() {
                 this.clearState();
-                FormValidator.resetForm(this.stockForm);
+                resetForm(this.stockForm);
             
                 if (this.$route && this.$route.params && this.$route.params.id) {
                     this.setStockId(this.$route.params.id);
                     this.get(this.$route.params.id)
                         .catch((err) => {
-                            Logger.error(err);
-                            Toast.callbackError();
+                            logError(err);
+                            toastServerError();
                         });
                 }
             },
             createStock() {
-                if (FormValidator.isFormValid(this.stockForm)) {
+                if (validateForm(this.stockForm)) {
                     this.create(this.stockDetails)
                         .then(() => {
                             return this.$router.push({
@@ -310,23 +312,23 @@
                             });
                         })
                         .then(() => {
-                            return Toast.success('Create Stock', 'Successfully created');
+                            return toastSuccess('Create Stock', 'Successfully created');
                         })
                         .catch((err) => {
-                            Logger.error(err);
-                            Toast.callbackError();
+                            logError(err);
+                            toastServerError();
                         });
                 }
             },
             updateStockDetails() {
-                if (FormValidator.isFormValid(this.stockForm)) {
+                if (validateForm(this.stockForm)) {
                     this.update(this.stockDetails)
                         .then(() => {
-                            return Toast.success('Update Stock Details', 'Successfully updated');
+                            return toastSuccess('Update Stock Details', 'Successfully updated');
                         })
                         .catch((err) => {
-                            Logger.error(err);
-                            Toast.callbackError();
+                            logError(err);
+                            toastServerError();
                         });
                 }
             },
@@ -338,11 +340,11 @@
                         });
                     })
                     .then(() => {
-                        return Toast.success('Remove Stock', 'Successfully removed');
+                        return toastSuccess('Remove Stock', 'Successfully removed');
                     })
                     .catch((err) => {
-                        Logger.error(err);
-                        Toast.callbackError();
+                        logError(err);
+                        toastServerError();
                     });
             },
             generateModalId

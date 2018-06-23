@@ -1,7 +1,6 @@
 /**
  * List of All Routes
  */
-import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 // Routes
@@ -15,8 +14,6 @@ import LoginLayout from '../layouts/login/LoginLayout.vue';
 
 // Components
 import Home from '../components/Home.vue';
-
-Vue.use(VueRouter);
 
 export default new VueRouter({
     mode: 'history',

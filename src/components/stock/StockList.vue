@@ -34,8 +34,8 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import { Toast } from '../../utils/toaster';
-    import { Logger } from '../../utils/logger';
+    import { toastServerError } from '../../utils/toaster';
+    import { logError } from '../../utils/logger';
     import ListPage from '../common/ListPage';
     import ListTable from '../common/ListTable';
     import ButtonRow from '../common/ButtonRow';
@@ -164,8 +164,8 @@
             loadStockList(options) {
                 this.findList(options)
                     .catch((err) => {
-                        Logger.error(err);
-                        Toast.callbackError();
+                        logError(err);
+                        toastServerError();
                     });
             },
             routeToStockEdit(id) {

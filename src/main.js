@@ -13,6 +13,7 @@ import 'src/styles/main.css';
 import 'bootstrap/dist/js/bootstrap.min';
 
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import App from './App';
 import filters from './filters';
 import router from './router';
@@ -24,6 +25,7 @@ import DatePicker from 'vue-bootstrap-datetimepicker';
 Vue.use(filters);
 Vue.use(ValidatePlugin);
 Vue.use(DatePicker);
+Vue.use(VueRouter);
 
 /**
  * Initialize a Vue instance
