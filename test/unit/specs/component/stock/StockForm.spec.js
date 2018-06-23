@@ -1,12 +1,6 @@
-// https://medium.com/pixelmatters/unit-testing-with-vue-approach-tips-and-tricks-part-2-61abc10b2d33
-// Lifecycle hooks: For example, test if a function is called when the component is mounted, updated, etc
-// Methods: Test if the function’s return is the expected or if the changes on data were correctly made.
-// Watchers: When changing a prop or data value, check if the watcher is invoked.
-// Computed properties: Check if the computed property is returning the intended value.
-
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import StockForm from 'src/components/stock/StockForm';
 import stockStore from 'src/store/modules/stock';
 import { returnTrue } from '../../utils/genericHelper';
@@ -24,7 +18,7 @@ StockForm.__Rewire__('validateForm', returnTrue);
 
 describe('StockForm.vue', () => {
     beforeEach(() => {
-        state = _.cloneDeep(stockStore.initialState);
+        state = cloneDeep(stockStore.initialState);
         
         actions = {
             createStock: sinon.spy(),

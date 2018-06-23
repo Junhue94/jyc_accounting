@@ -8,12 +8,8 @@ export const mockQueryParam = {
     filter: {}
 };
 
-export const getQueryData = (result) => {
-    return result.data;
-};
+export const getQueryData = result => result.data;
 
-export const getQueryParams = (result) => {
-    return _.omit(result, 'data');
-};
+export const getQueryParams = result => _.omit(result, 'data');
 
 export const returnTrue = () => true;
