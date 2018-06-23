@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import cloneDeep from 'lodash/cloneDeep';
 import StockForm from 'src/components/stock/StockForm';
 import stockStore from 'src/store/modules/stock';
-import { returnTrue } from '../../utils/genericHelper';
+import { returnTrue } from '../../../helpers/genericHelper';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);

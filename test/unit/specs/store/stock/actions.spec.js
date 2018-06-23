@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import store from 'src/store/modules/stock';
-import { actionHelper } from '../../utils/actionHelper';
+import { actionHelper } from '../../../helpers/actionHelper';
 import {
     mockQueryParam,
     getQueryData,
     getQueryParams
-} from '../../utils/genericHelper';
+} from '../../../helpers/genericHelper';
 import {
     CREATE_STOCK,
     GET_STOCK,

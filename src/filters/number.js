@@ -20,7 +20,7 @@ accounting.settings = {
     }
 };
 
-const countDecimals = (value) => {
+export const countDecimals = (value) => {
     if(Math.floor(value) === value) {
         return 0;
     }

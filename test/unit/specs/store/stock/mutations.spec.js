@@ -8,7 +8,7 @@ import {
     mockQueryParam,
     getQueryData,
     getQueryParams
-} from '../../utils/genericHelper';
+} from '../../../helpers/genericHelper';
 
 const {
     SET_STOCK_ID,
