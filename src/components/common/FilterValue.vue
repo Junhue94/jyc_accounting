@@ -7,7 +7,7 @@
             <div class="input-group row-offset">
                 <span class="input-group-addon">{{ filter.name }}</span>
                 <select
-                    class="form-control"
+                    class="filter form-control"
                     title=""
                     v-model="filter.eq"
                     @change="onFilterChange({ filter })"

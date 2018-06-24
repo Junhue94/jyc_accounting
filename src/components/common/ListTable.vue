@@ -5,6 +5,7 @@
                 <thead>
                 <tr>
                     <th
+                        class="header"
                         v-for="header in headerList"
                         @click="findList({ sortField: header.field, sortSeq: setSortSeq(header.field) })"
                     >{{ header.name }}
@@ -13,6 +14,7 @@
                 </thead>
                 <tbody>
                 <tr
+                    class="data"
                     v-for="data in dataList"
                     @click="onDataListClick(data._id)"
                 >
@@ -152,20 +154,23 @@
                 }
                 return this.sortSeq;
             },
-            changePage(page) {
-                const { offset, currentPage, totalPage } = this.queryParams;
-                let newPage;
-                
+            setNewPage(page) {
+                const { currentPage } = this.queryParams;
+    
                 // set page number
                 if (page === 'previous') {
-                    newPage = currentPage - 1;
+                    return currentPage - 1;
                 }
                 else if (page === 'next') {
-                    newPage = currentPage + 1;
+                    return currentPage + 1;
                 }
                 else {
-                    newPage = page;
+                    return page;
                 }
+            },
+            changePage(page) {
+                const { offset, currentPage, totalPage } = this.queryParams;
+                const newPage = this.setNewPage(page);
                 
                 // set page range
                 if (totalPage <= 5) {
