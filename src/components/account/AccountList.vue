@@ -20,20 +20,14 @@
             <panel>
                 <template slot="heading">ACCOUNTS</template>
                 <template slot="body">
-                    <!--<list-table>-->
-                        <!--<template slot="thead">-->
-                            <!--<tr>-->
-                                <!--<th>Name</th>-->
-                                <!--<th>Total</th>-->
-                            <!--</tr>-->
-                        <!--</template>-->
-                        <!--<template slot="tbody">-->
-                            <!--<tr v-for="account in accountList">-->
-                                <!--<td>{{ account.name}}</td>-->
-                                <!--<td></td>-->
-                            <!--</tr>-->
-                        <!--</template>-->
-                    <!--</list-table>-->
+                    <list-table
+                        :headerList="accountListHeaders"
+                        :dataList="accountList"
+                        :onDataListClick="routeToAccountEdit"
+                        :findList="loadAccountList"
+                        :queryParams="accountListParams"
+                    >
+                    </list-table>
                 </template>
             </panel>
         </template>
@@ -57,24 +51,48 @@
             ButtonRow,
             Panel
         },
+        data() {
+            return {
+                accountListHeaders: [
+                    {
+                        field: 'name',
+                        name: 'Name'
+                    },
+                    {
+                        field: 'total',
+                        name: 'Total'
+                    }
+                ]
+            };
+        },
         methods: {
             ...mapActions('account', {
                 findList: 'findAccountList'
             }),
-            loadAccountList() {
-                this.findList()
+            loadAccountList(options) {
+                this.findList(options)
                     .catch((err) => {
                         logError(err);
                         toastServerError();
                     });
+            },
+            routeToAccountEdit(id) {
+                this.$router.push({
+                    name: 'accountEdit',
+                    params: { id }
+                });
             }
         },
         computed: {
             ...mapGetters('account', {
-                fetchAccountList: 'accountList'
+                fetchAccountList: 'accountList',
+                fetchAccountListParams: 'accountListParams'
             }),
             accountList() {
                 return this.fetchAccountList;
+            },
+            accountListParams() {
+                return this.fetchAccountListParams;
             }
         },
         created() {

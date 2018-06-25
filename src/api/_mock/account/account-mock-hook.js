@@ -28,7 +28,7 @@ export const AccountMockHook = {
             hook.result = DELETE_ACCOUNT;
         },
         find(hook) {
-            hook.result = FIND_ACCOUNT_LIST;
+            hook.result = FIND_ACCOUNT_LIST(hook.params);
         }
     }
 };

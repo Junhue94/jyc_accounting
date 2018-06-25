@@ -205,5 +205,20 @@ describe('ListTable.vue', () => {
             const inBetweenPages = wrapper.vm.$data.pageRange;
             assert.deepEqual(inBetweenPages, [3, 4, 5, 6, 7]);
         });
+    
+        it('changePage - should trigger findList if navigate to different page', () => {
+            const wrapper = shallowMount(ListTable, {
+                localVue,
+                propsData
+            });
+            
+            wrapper.setData({ pageRange: [] });
+            wrapper.setProps({
+                findList: sinon.spy(),
+                queryParams: { offset: 10, currentPage: 1, totalPage: 10 }
+            });
+            wrapper.vm.changePage('next');
+            assert.isTrue(wrapper.props().findList.called);
+        });
     });
 });

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Account Mock Result
  * For Mock API Calls and Unit Tests
@@ -11,9 +13,9 @@ export const UPDATE_ACCOUNT = {};
 
 export const DELETE_ACCOUNT = {};
 
-export const FIND_ACCOUNT_LIST = {
-    total_rows: 10,
-    data: [
+export const FIND_ACCOUNT_LIST = params => {
+    const { offset = 50, currentPage = 1, sortField, sortSeq, filter } = params;
+    let data = [
         {
             _id: '1',
             type: 'Asset',
@@ -74,5 +76,20 @@ export const FIND_ACCOUNT_LIST = {
             name: 'Maybank KE',
             description: 'Brokerage Account'
         }
-    ]
+    ];
+    
+    if (sortField && sortSeq) {
+        data = _.orderBy(data, [sortField], [sortSeq]);
+    }
+    
+    return {
+        offset,
+        currentPage,
+        totalRows: 500,
+        totalPage: 3,
+        sortField,
+        sortSeq,
+        filter,
+        data
+    };
 };

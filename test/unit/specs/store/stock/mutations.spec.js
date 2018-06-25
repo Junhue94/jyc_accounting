@@ -32,6 +32,12 @@ describe('Stock Store', () => {
             const mutation = SET_STOCK_ID(state, id);
             assert.equal(state.stockId, id);
         });
+    
+        it('should mutate stockDetails using SET_STOCK_DETAILS', () => {
+            const updatedParams = getQueryParams(stockList);
+            const mutation = SET_STOCK_DETAILS(state, updatedParams);
+            assert.deepEqual(state.stockDetails, updatedParams);
+        });
 
         it('should mutate stockList using SET_STOCK_LIST', () => {
             const updatedList = getQueryData(stockList);
@@ -39,16 +45,10 @@ describe('Stock Store', () => {
             assert.deepEqual(state.stockList, updatedList);
         });
     
-        it('should mutate stockDetails using SET_STOCK_DETAILS', () => {
+        it('should mutate stockListParams using SET_STOCK_LIST_PARAMS', () => {
             const updatedDetails = GET_STOCK;
             const mutation = SET_STOCK_LIST_PARAMS(state, updatedDetails);
             assert.deepEqual(state.stockListParams, updatedDetails);
-        });
-        
-        it('should mutate stockListParams using SET_STOCK_LIST_PARAMS', () => {
-            const updatedParams = getQueryParams(stockList);
-            const mutation = SET_STOCK_DETAILS(state, updatedParams);
-            assert.deepEqual(state.stockDetails, updatedParams);
         });
     
         it('should reset state using CLEAR_ALL_STATE', () => {

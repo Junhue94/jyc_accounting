@@ -4,13 +4,23 @@
 
 import _ from 'lodash';
 import AccountService from '../../api/account-service';
+import { getQueryParams } from '../../utils/helper';
 
 const accountService = new AccountService();
 
 const initialState = {
     accountId: null,
     accountDetails: {},
-    accountList: []
+    accountList: [],
+    accountListParams: {
+        offset: 50,
+        totalRows: null,
+        currentPage: 1,
+        totalPage: null,
+        sortField: null,
+        sortSeq: null,
+        filter: {}
+    }
 };
 
 
@@ -26,10 +36,14 @@ const mutations = {
     'SET_ACCOUNT_LIST' (state, accountList) {
         state.accountList = accountList;
     },
+    'SET_ACCOUNT_LIST_PARAMS' (state, accountListParams) {
+        state.accountListParams = { ...accountListParams };
+    },
     'CLEAR_ALL_STATE' (state) {
         state.accountId = _.cloneDeep(initialState.accountId);
         state.accountDetails = _.cloneDeep(initialState.accountDetails);
         state.accountList = _.cloneDeep(initialState.accountList);
+        state.accountListParams = _.cloneDeep(initialState.accountListParams);
     }
 };
 
@@ -47,6 +61,7 @@ const actions = {
         return accountService.findAccountList(options)
             .then((res) => {
                 commit('SET_ACCOUNT_LIST', res.data);
+                commit('SET_ACCOUNT_LIST_PARAMS', getQueryParams(res));
                 return res;
             });
     },
@@ -79,6 +94,9 @@ const getters = {
     },
     accountList: (state) => {
         return state.accountList;
+    },
+    accountListParams: (state) => {
+        return state.accountListParams;
     }
 };
 
