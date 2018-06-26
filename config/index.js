@@ -21,7 +21,7 @@ module.exports = {
     // Configurations for DEVELOPMENT environment
     dev: {
         env: require('./dev.env'),
-        port: 3030,
+        port: 3000,
         assetsPublicPath: '/',
         assetsSubDirectory: 'static',
         cssSourceMap: false
