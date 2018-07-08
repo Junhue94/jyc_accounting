@@ -5,12 +5,12 @@ import _ from 'lodash';
  * For Mock API Calls and Unit Tests
  */
 export const CREATE_STOCK = {
-    _id: '1',
+    id: 1,
     type: 'Current',
     entryDate: new Date(2017, 4, 15),
     exitDate: null,
     name: 'UOB',
-    sector: 'Banking',
+    sector: 'Financial',
     country: 'SG',
     currency: 'S$',
     priceBuy: 10.5,
@@ -28,7 +28,7 @@ export const CREATE_STOCK = {
 };
 
 export const GET_STOCK = {
-    _id: '2',
+    id: 2,
     type: 'Watchlist',
     entryDate: new Date(2018, 8, 26),
     exitDate: null,
@@ -51,7 +51,7 @@ export const GET_STOCK = {
 };
 
 export const UPDATE_STOCK = {
-    _id: '3',
+    id: 3,
     type: 'Exited',
     entryDate: new Date(2016, 7, 29),
     exitDate: new Date(2017, 6, 12),
@@ -72,9 +72,8 @@ export const UPDATE_STOCK = {
     updatedAt: 1535090135034,
     deleted: false
 };
-
 export const DELETE_STOCK = {
-    _id: '4',
+    id: 4,
     type: 'Partial Exit',
     entryDate: new Date(2017, 0, 17),
     exitDate: new Date(2017, 1, 9),
@@ -100,7 +99,7 @@ export const FIND_STOCK_LIST = params => {
     const { offset = 50, currentPage = 1, sortField, sortSeq, filter } = params;
     let data = [
         {
-            _id: '1',
+            id: 1,
             type: 'Current',
             entryDate: new Date(2017, 4, 14),
             exitDate: null,
@@ -122,7 +121,7 @@ export const FIND_STOCK_LIST = params => {
             deleted: false
         },
         {
-            _id: '2',
+            id: 2,
             type: 'Watchlist',
             entryDate: null,
             exitDate: null,
@@ -144,7 +143,7 @@ export const FIND_STOCK_LIST = params => {
             deleted: false
         },
         {
-            _id: '3',
+            id: 3,
             type: 'Exited',
             entryDate: new Date(2016, 7, 29),
             exitDate: new Date(2017, 6, 12),
@@ -166,7 +165,7 @@ export const FIND_STOCK_LIST = params => {
             deleted: false
         },
         {
-            _id: '4',
+            id: 4,
             type: 'Partial Exit',
             entryDate: new Date(2017, 0, 19),
             exitDate: new Date(2017, 1, 9),
@@ -188,7 +187,7 @@ export const FIND_STOCK_LIST = params => {
             deleted: false
         },
         {
-            _id: '5',
+            id: 5,
             type: 'Current',
             entryDate: new Date(2017, 2, 3),
             exitDate: null,
@@ -210,7 +209,7 @@ export const FIND_STOCK_LIST = params => {
             deleted: false
         },
         {
-            _id: '6',
+            id: 6,
             type: 'Sold',
             entryDate: new Date(2017, 8, 9),
             exitDate: new Date(2018, 0, 19),

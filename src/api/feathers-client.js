@@ -2,8 +2,6 @@
  * Feathers Client Configurations
  */
 
-'use strict';
-
 import feathers from 'feathers/client';
 import hooks from 'feathers-hooks';
 import auth from 'feathers-authentication-client';

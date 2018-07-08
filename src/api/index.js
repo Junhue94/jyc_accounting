@@ -10,13 +10,13 @@ import feathersClient from './feathers-client';
  */
 export const SERVER_URL = process.env.NODE_ENV === 'production'
     ? 'http://jyc_accounting.com'
-    : 'http://localhost:3090';
+    : 'http://localhost:8300';
 
 /**
  * Feathers Services
  */
-export const ACCOUNT_SERVICE = feathersClient.service('account');
-export const STOCK_SERVICE = feathersClient.service('stock');
+export const ACCOUNT_SERVICE = feathersClient.service('api/account');
+export const STOCK_SERVICE = feathersClient.service('api/stock');
 
 /**
  * Postgres Table

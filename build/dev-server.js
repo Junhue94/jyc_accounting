@@ -13,6 +13,8 @@ if (!process.env.NODE_ENV) {
 const express = require('express');
 const path = require('path');
 const opn = require('opn');
+const proxyMiddleware = require('http-proxy-middleware');
+const proxyTable = config.dev.proxyTable;
 // Default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port;
 const url = 'http://localhost:' + port;
@@ -31,6 +33,15 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
 
 // Create a dev server
 const app = express();
+
+// Proxy api requests
+Object.keys(proxyTable).forEach(context => {
+    let options = proxyTable[context];
+    if (typeof options === 'string') {
+        options = { target: options }
+    }
+    app.use(proxyMiddleware(options.filter || context, options));
+});
 
 // Handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')());

@@ -4,6 +4,7 @@
  */
 
 const path = require('path');
+const proxy = 'http://localhost:8300';
 
 module.exports = {
     // Configurations for PRODUCTION environment
@@ -24,6 +25,9 @@ module.exports = {
         port: 3000,
         assetsPublicPath: '/',
         assetsSubDirectory: 'static',
-        cssSourceMap: false
+        cssSourceMap: false,
+        proxyTable: {
+            '/api': { target: proxy }
+        }
     }
 };
