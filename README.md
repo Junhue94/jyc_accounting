@@ -1,1 +1,1 @@
-# JYC Accounting
+# JYC Stock Data Archive
